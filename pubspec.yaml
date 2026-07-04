@@ -11,7 +11,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  bloc: ^9.0.0
   cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.7
 
   # Firebase
   firebase_core: ^3.13.0
@@ -61,7 +63,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  flutter_native_splash: ^2.4.5
   flutter_launcher_icons: ^0.14.3
 
 flutter_native_splash:

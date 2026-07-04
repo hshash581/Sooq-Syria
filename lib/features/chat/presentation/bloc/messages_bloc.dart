@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/repositories/chat_repository.dart';
 import 'messages_event.dart';
@@ -9,7 +8,6 @@ import 'messages_state.dart';
 
 class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   final ChatRepository _chatRepository;
-  DocumentSnapshot? _lastDoc;
   String? _currentChatId;
 
   MessagesBloc({required ChatRepository chatRepository})
@@ -25,7 +23,6 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
       LoadMessages event, Emitter<MessagesState> emit) async {
     emit(const MessagesLoading());
     _currentChatId = event.chatId;
-    _lastDoc = null;
     try {
       final messages =
           await _chatRepository.getMessages(event.chatId);

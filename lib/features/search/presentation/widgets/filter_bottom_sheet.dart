@@ -179,7 +179,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         label: Text(cond),
                         selected: selected,
                         onSelected: (_) => setState(() => _condition = cond == 'الكل' ? null : cond),
-                        selectedColor: AppColors.primary.withOpacity(0.15),
+                        selectedColor: AppColors.primary.withValues(alpha: 0.15),
                         labelStyle: AppTextStyles.bodyMedium.copyWith(
                           color: selected ? AppColors.primary : AppColors.textSecondary,
                         ),

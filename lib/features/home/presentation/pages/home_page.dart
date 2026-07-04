@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../../core/constants/arabic_strings.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/config/routes_config.dart';
 import '../../../../core/utils/helpers.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../../core/widgets/shimmer_widget.dart';
-import '../../../../core/widgets/empty_state_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<String> _bannerImages = [];
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Icon(icons[index], color: AppColors.primary, size: 28),
@@ -286,7 +282,7 @@ class _AdCard extends StatelessWidget {
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, 2)),
           ],
         ),
         child: Column(

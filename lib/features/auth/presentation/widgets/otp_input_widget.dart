@@ -57,19 +57,6 @@ class _OtpInputWidgetState extends State<OtpInputWidget> {
     widget.onChanged?.call(code);
   }
 
-  void _handlePaste(String text) {
-    final digits = text.replaceAll(RegExp(r'[^0-9]'), '');
-    for (int i = 0; i < 6 && i < digits.length; i++) {
-      _controllers[i].text = digits[i];
-    }
-    final nextIndex = digits.length < 6 ? digits.length : 5;
-    _focusNodes[nextIndex].requestFocus();
-    _notifyChanged();
-    if (digits.length >= 6) {
-      _notifyCompleted();
-    }
-  }
-
   void clear() {
     for (final c in _controllers) {
       c.clear();

@@ -1,5 +1,4 @@
 import 'package:geolocator/geolocator.dart';
-import '../config/app_config.dart';
 
 class LocationService {
   static final LocationService _instance = LocationService._internal();

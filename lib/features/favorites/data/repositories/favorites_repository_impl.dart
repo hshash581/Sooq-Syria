@@ -3,7 +3,6 @@ import '../../../ads/data/models/ad_model.dart';
 import '../../../ads/domain/entities/ad_entity.dart';
 import '../../domain/repositories/favorites_repository.dart';
 import '../datasources/favorites_remote_data_source.dart';
-import '../models/favorite_model.dart';
 
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final FavoritesRemoteDataSource remoteDataSource;

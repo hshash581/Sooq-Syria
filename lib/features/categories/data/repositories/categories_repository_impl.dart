@@ -1,7 +1,6 @@
 import '../../../categories/domain/entities/category_entity.dart';
 import '../../../categories/domain/repositories/categories_repository.dart';
 import '../datasources/categories_remote_data_source.dart';
-import '../models/category_model.dart';
 
 class CategoriesRepositoryImpl implements CategoriesRepository {
   final CategoriesRemoteDataSource remoteDataSource;

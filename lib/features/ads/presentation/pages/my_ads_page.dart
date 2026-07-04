@@ -4,9 +4,6 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/config/routes_config.dart';
 import '../../../../core/utils/helpers.dart';
-import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../../core/widgets/empty_state_widget.dart';
-import '../../../../core/widgets/shimmer_widget.dart';
 import '../../../../core/widgets/custom_dialog.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
 
@@ -96,7 +93,7 @@ class _MyAdsPageState extends State<MyAdsPage> with SingleTickerProviderStateMix
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
-                        color: statusColor.withOpacity(0.1),
+                        color: statusColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(statusText, style: AppTextStyles.caption.copyWith(color: statusColor)),

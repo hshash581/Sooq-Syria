@@ -58,7 +58,7 @@ class MessageEntity extends Equatable {
       chatId: model.chatId,
       senderId: model.senderId,
       senderName: model.senderName,
-      senderImage: model.senderImage ?? '',
+      senderImage: model.senderImage,
       text: model.text,
       type: model.type,
       imageUrl: model.imageUrl,

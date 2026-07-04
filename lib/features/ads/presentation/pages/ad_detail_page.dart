@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constants/arabic_strings.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/config/routes_config.dart';
 import '../../../../core/utils/helpers.dart';
 import '../../../../core/utils/date_utils.dart' as date_utils;
 import '../../../../core/widgets/custom_app_bar.dart';
@@ -94,7 +91,7 @@ class _AdDetailPageState extends State<AdDetailPage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: AppColors.success.withOpacity(0.1),
+                                  color: AppColors.success.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -116,7 +113,7 @@ class _AdDetailPageState extends State<AdDetailPage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: AppColors.accent.withOpacity(0.15),
+                                  color: AppColors.accent.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -239,7 +236,7 @@ class _AdDetailPageState extends State<AdDetailPage> {
   }
 
   void _showFullScreenImage(String url) {
-    Navigator.push(context, MaterialPageRoute(
+    Navigator.push(context, MaterialPageRoute<void>(
       builder: (_) => Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -270,7 +267,7 @@ class _AdDetailPageState extends State<AdDetailPage> {
                 CircleAvatar(
                   radius: 28,
                   backgroundColor: AppColors.shimmerBase,
-                  backgroundImage: _sellerImage != null ? NetworkImage(_sellerImage!) : null,
+                  backgroundImage: _sellerImage != null ? NetworkImage(_sellerImage) : null,
                   child: _sellerImage == null
                       ? Text(
                           Helpers.getInitials(_sellerName),
@@ -314,7 +311,7 @@ class _AdDetailPageState extends State<AdDetailPage> {
       decoration: BoxDecoration(
         color: AppColors.surface,
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 8, offset: const Offset(0, -2)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, -2)),
         ],
       ),
       child: SafeArea(

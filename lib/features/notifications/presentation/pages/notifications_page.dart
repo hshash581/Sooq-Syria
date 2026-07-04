@@ -101,7 +101,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 24,
-                backgroundColor: _getTypeColor(type).withOpacity(0.1),
+                backgroundColor: _getTypeColor(type).withValues(alpha: 0.1),
                 child: Icon(
                   _getTypeIcon(type),
                   color: _getTypeColor(type),

@@ -64,7 +64,7 @@ class _ReportsManagementPageState extends State<ReportsManagementPage> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: AppColors.error.withOpacity(0.1),
+                          color: AppColors.error.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(Icons.flag_rounded, color: AppColors.error, size: 20),

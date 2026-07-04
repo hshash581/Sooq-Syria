@@ -33,7 +33,7 @@ class AdminDrawer extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.white.withOpacity(0.2),
+                    color: AppColors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(
@@ -50,7 +50,7 @@ class AdminDrawer extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   ArabicStrings.statistics,
-                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.white.withOpacity(0.8)),
+                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.white.withValues(alpha: 0.8)),
                 ),
               ],
             ),
@@ -121,7 +121,7 @@ class AdminDrawer extends StatelessWidget {
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: AppColors.error.withOpacity(0.1),
+                  color: AppColors.error.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(Icons.logout_rounded, color: AppColors.error, size: 22),
@@ -170,7 +170,7 @@ class _DrawerMenuItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary.withOpacity(0.08) : null,
+        color: isSelected ? AppColors.primary.withValues(alpha: 0.08) : null,
         borderRadius: BorderRadius.circular(12),
       ),
       child: ListTile(

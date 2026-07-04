@@ -85,7 +85,7 @@ class _UsersManagementPageState extends State<UsersManagementPage> {
                   margin: const EdgeInsets.only(bottom: 8),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: isBlocked ? AppColors.error.withOpacity(0.1) : AppColors.primary.withOpacity(0.1),
+                      backgroundColor: isBlocked ? AppColors.error.withValues(alpha: 0.1) : AppColors.primary.withValues(alpha: 0.1),
                       child: Icon(
                         Icons.person_rounded,
                         color: isBlocked ? AppColors.error : AppColors.primary,
@@ -110,7 +110,7 @@ class _UsersManagementPageState extends State<UsersManagementPage> {
                     ),
                     trailing: Switch(
                       value: isBlocked,
-                      activeColor: AppColors.error,
+                      activeThumbColor: AppColors.error,
                       onChanged: (_) => _toggleBlock(index),
                     ),
                   ),

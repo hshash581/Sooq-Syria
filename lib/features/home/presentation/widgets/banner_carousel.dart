@@ -111,7 +111,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                               if (banner.subtitle != null)
                                 Text(
                                   banner.subtitle!,
-                                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.white.withOpacity(0.9)),
+                                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.white.withValues(alpha: 0.9)),
                                 ),
                             ],
                           ),

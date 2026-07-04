@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../ads/data/models/ad_model.dart';
 import '../../../ads/domain/entities/ad_entity.dart';
 import '../../../categories/data/datasources/categories_remote_data_source.dart';
 import '../../../categories/domain/entities/category_entity.dart';
 import '../../domain/entities/banner_entity.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../datasources/home_remote_data_source.dart';
-import '../models/banner_model.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;

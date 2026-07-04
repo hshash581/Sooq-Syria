@@ -7,7 +7,6 @@ import '../../../../core/services/firebase_service.dart';
 import '../../domain/entities/ad_entity.dart';
 import '../../domain/repositories/ads_repository.dart';
 import '../datasources/ads_remote_data_source.dart';
-import '../models/ad_model.dart';
 
 class AdsRepositoryImpl implements AdsRepository {
   final AdsRemoteDataSource remoteDataSource;

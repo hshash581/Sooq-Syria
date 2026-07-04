@@ -46,7 +46,7 @@ class CategoriesPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.border.withOpacity(0.5)),
+                border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class CategoriesPage extends StatelessWidget {
                     width: 56,
                     height: 56,
                     decoration: BoxDecoration(
-                      color: cat.color.withOpacity(0.1),
+                      color: cat.color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Icon(cat.icon, color: cat.color, size: 28),

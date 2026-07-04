@@ -6,7 +6,6 @@ import '../../../../core/config/routes_config.dart';
 import '../../../../core/utils/helpers.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
-import '../../../../core/widgets/shimmer_widget.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -87,7 +86,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             child: Container(
                               padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.4),
+                                color: Colors.black.withValues(alpha: 0.4),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(Icons.close_rounded, size: 16, color: Colors.white),

@@ -3,8 +3,7 @@ import '../../../../core/config/app_config.dart';
 import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_text_field.dart';
+
 import '../../../../core/widgets/custom_snackbar.dart';
 import '../../../../core/widgets/custom_dialog.dart';
 
@@ -21,7 +20,6 @@ class _SettingsManagementPageState extends State<SettingsManagementPage> {
 
   final List<String> _categories = ['عقارات', 'سيارات', 'إلكترونيات', 'أثاث', 'ملابس', 'خدمات', 'حيوانات', 'وظائف'];
   final List<String> _governorates = List.from(AppConfig.governorates);
-  final List<Map<String, List<String>>> _cities = [];
 
   void _addItem(String type) async {
     final name = await CustomDialog.showInputDialog(

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/config/app_config.dart';
-import '../../../../core/config/routes_config.dart';
 import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
@@ -135,7 +134,7 @@ class _CreateAdPageState extends State<CreateAdPage> {
   void _submitAd() async {
     if (!mounted) return;
     setState(() => _isSubmitting = true);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     if (!mounted) return;
     setState(() => _isSubmitting = false);
     CustomSnackbar.showSuccess(context, 'تم نشر الإعلان بنجاح');
@@ -469,7 +468,7 @@ class _CreateAdPageState extends State<CreateAdPage> {
       decoration: BoxDecoration(
         color: AppColors.surface,
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2)),
         ],
       ),
       child: SafeArea(
@@ -519,7 +518,7 @@ class _ImageOption extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, size: 32, color: AppColors.primary),

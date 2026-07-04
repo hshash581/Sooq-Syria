@@ -40,7 +40,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   }
 
   Future<void> _navigateAfterDelay() async {
-    await Future.delayed(const Duration(milliseconds: AppConstants.splashDuration));
+    await Future<void>.delayed(const Duration(milliseconds: AppConstants.splashDuration));
     if (!mounted) return;
     final authState = context.read<AuthBloc>().state;
     final isLoggedIn = authState is Authenticated;

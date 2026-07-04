@@ -27,7 +27,7 @@ class _AdImageSliderState extends State<AdImageSlider> {
   void _showFullScreen(int index) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      MaterialPageRoute<void>(
         builder: (_) => _FullScreenImageGallery(
           images: widget.images,
           initialIndex: index,

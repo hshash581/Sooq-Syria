@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../ads/data/models/ad_model.dart';
 import '../../../ads/domain/entities/ad_entity.dart';
 import '../../../categories/data/models/category_model.dart';
 import '../../../reports/domain/entities/report_entity.dart';
 import '../../domain/entities/statistics_entity.dart';
 import '../../domain/repositories/admin_repository.dart';
 import '../datasources/admin_remote_data_source.dart';
-import '../models/statistics_model.dart';
 
 class AdminRepositoryImpl implements AdminRepository {
   final AdminRemoteDataSource remoteDataSource;

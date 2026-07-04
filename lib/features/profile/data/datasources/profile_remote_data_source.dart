@@ -75,7 +75,7 @@ class ProfileRemoteDataSource {
           .get();
 
       for (final adDoc in adsSnapshot.docs) {
-        final images = List<String>.from(adDoc.data()!['images'] as List<dynamic>? ?? []);
+        final images = List<String>.from(adDoc.data()['images'] as List<dynamic>? ?? []);
         for (final imageUrl in images) {
           try {
             final ref = await _firebaseService.storage.refFromURL(imageUrl);

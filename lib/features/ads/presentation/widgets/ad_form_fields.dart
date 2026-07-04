@@ -225,7 +225,7 @@ class AdFormFields extends StatelessWidget {
           ),
           Switch(
             value: isNegotiable,
-            activeColor: AppColors.primary,
+            activeThumbColor: AppColors.primary,
             onChanged: onNegotiableChanged,
           ),
         ],

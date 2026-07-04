@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import '../../../../core/config/firebase_config.dart';
 import '../../../../core/services/firebase_service.dart';
 import '../../data/models/ad_model.dart';

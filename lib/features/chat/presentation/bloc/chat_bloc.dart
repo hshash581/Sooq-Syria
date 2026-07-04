@@ -32,8 +32,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       CreateChat event, Emitter<ChatState> emit) async {
     emit(const ChatsLoading());
     try {
-      final chat =
-          await _chatRepository.createChat(event.adId, event.sellerId);
+      await _chatRepository.createChat(event.adId, event.sellerId);
       final chats = await _chatRepository.getChats();
       emit(ChatsLoaded(chats));
     } catch (e) {

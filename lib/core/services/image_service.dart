@@ -118,7 +118,7 @@ class ImageService {
       },
       onError: (Object error) => controller.addError(error),
       onDone: () async {
-        final url = await ref.getDownloadURL();
+        await ref.getDownloadURL();
         controller.add(1.0);
         await controller.close();
       },
