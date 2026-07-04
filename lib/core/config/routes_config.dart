@@ -33,6 +33,13 @@ class RoutesConfig {
   static const String adminSettings = '/admin/settings';
 }
 
+class OtpPageArguments {
+  final String phone;
+  final String verificationId;
+
+  const OtpPageArguments({required this.phone, required this.verificationId});
+}
+
 class AppRouter {
   AppRouter._();
 
@@ -60,7 +67,8 @@ class AppRouter {
       return null;
     }
 
-    final isPublicPrefix = location.startsWith('/ad/') ||
+    final isPublicPrefix =
+        location.startsWith('/ad/') ||
         location.startsWith('/category/') ||
         location.startsWith('/search');
 
@@ -80,17 +88,14 @@ class AppRouter {
   }
 
   static final List<RouteBase> _routes = [
-    GoRoute(
-      path: RoutesConfig.splash,
-      builder: (_, __) => const SplashPage(),
-    ),
-    GoRoute(
-      path: RoutesConfig.login,
-      builder: (_, __) => const LoginPage(),
-    ),
+    GoRoute(path: RoutesConfig.splash, builder: (_, __) => const SplashPage()),
+    GoRoute(path: RoutesConfig.login, builder: (_, __) => const LoginPage()),
     GoRoute(
       path: RoutesConfig.otp,
-      builder: (_, state) => OtpPage(phone: state.extra as String),
+      builder: (_, state) {
+        final args = state.extra as OtpPageArguments;
+        return OtpPage(phone: args.phone, verificationId: args.verificationId);
+      },
     ),
     GoRoute(
       path: RoutesConfig.register,
@@ -102,15 +107,11 @@ class AppRouter {
     ),
     GoRoute(
       path: '/ad/:id',
-      builder: (_, state) => AdDetailPage(
-        adId: state.pathParameters['id']!,
-      ),
+      builder: (_, state) => AdDetailPage(adId: state.pathParameters['id']!),
       routes: [
         GoRoute(
           path: 'report',
-          builder: (_, state) => ReportPage(
-            adId: state.pathParameters['id']!,
-          ),
+          builder: (_, state) => ReportPage(adId: state.pathParameters['id']!),
         ),
       ],
     ),
@@ -120,45 +121,32 @@ class AppRouter {
     ),
     GoRoute(
       path: '/edit-ad/:id',
-      builder: (_, state) => EditAdPage(
-        adId: state.pathParameters['id']!,
-      ),
+      builder: (_, state) => EditAdPage(adId: state.pathParameters['id']!),
     ),
-    GoRoute(
-      path: RoutesConfig.myAds,
-      builder: (_, __) => const MyAdsPage(),
-    ),
+    GoRoute(path: RoutesConfig.myAds, builder: (_, __) => const MyAdsPage()),
     GoRoute(
       path: RoutesConfig.editProfile,
       builder: (_, __) => const EditProfilePage(),
     ),
-    GoRoute(
-      path: RoutesConfig.chats,
-      builder: (_, __) => const ChatsPage(),
-    ),
+    GoRoute(path: RoutesConfig.chats, builder: (_, __) => const ChatsPage()),
     GoRoute(
       path: '/chat/:id',
-      builder: (_, state) => ChatDetailPage(
-        chatId: state.pathParameters['id']!,
-      ),
+      builder: (_, state) =>
+          ChatDetailPage(chatId: state.pathParameters['id']!),
     ),
     GoRoute(
       path: RoutesConfig.notifications,
       builder: (_, __) => const NotificationsPage(),
     ),
-    GoRoute(
-      path: RoutesConfig.search,
-      builder: (_, __) => const SearchPage(),
-    ),
+    GoRoute(path: RoutesConfig.search, builder: (_, __) => const SearchPage()),
     GoRoute(
       path: RoutesConfig.searchFilters,
       builder: (_, __) => const SearchFiltersPage(),
     ),
     GoRoute(
       path: '/category/:id',
-      builder: (_, state) => CategoryAdsPage(
-        categoryName: state.extra as String,
-      ),
+      builder: (_, state) =>
+          CategoryAdsPage(categoryName: state.extra as String),
     ),
     GoRoute(
       path: RoutesConfig.settings,
@@ -166,9 +154,7 @@ class AppRouter {
     ),
     GoRoute(
       path: '/report/:adId',
-      builder: (_, state) => ReportPage(
-        adId: state.pathParameters['adId']!,
-      ),
+      builder: (_, state) => ReportPage(adId: state.pathParameters['adId']!),
     ),
     GoRoute(
       path: RoutesConfig.adminDashboard,
@@ -197,10 +183,7 @@ class AppRouter {
     ShellRoute(
       builder: (_, __, child) => MainPage(child: child),
       routes: [
-        GoRoute(
-          path: RoutesConfig.home,
-          builder: (_, __) => const HomePage(),
-        ),
+        GoRoute(path: RoutesConfig.home, builder: (_, __) => const HomePage()),
         GoRoute(
           path: RoutesConfig.categories,
           builder: (_, __) => const CategoriesPage(),

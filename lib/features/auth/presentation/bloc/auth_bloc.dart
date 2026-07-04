@@ -10,8 +10,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
 
   AuthBloc({required AuthRepository authRepository})
-      : _authRepository = authRepository,
-        super(const AuthInitial()) {
+    : _authRepository = authRepository,
+      super(const AuthInitial()) {
     on<CheckAuthStatus>(_onCheckAuthStatus);
     on<SignInWithPhone>(_onSignInWithPhone);
     on<VerifyOtp>(_onVerifyOtp);
@@ -22,7 +22,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onCheckAuthStatus(
-      CheckAuthStatus event, Emitter<AuthState> emit) async {
+    CheckAuthStatus event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       final isLoggedIn = await _authRepository.isLoggedIn();
       if (isLoggedIn) {
@@ -37,22 +39,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onSignInWithPhone(
-      SignInWithPhone event, Emitter<AuthState> emit) async {
+    SignInWithPhone event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthLoading());
     try {
       final user = await _authRepository.signInWithPhone(event.phoneNumber);
-      emit(Authenticated(user));
+      emit(AuthCodeSent(user.id));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
-  Future<void> _onVerifyOtp(
-      VerifyOtp event, Emitter<AuthState> emit) async {
+  Future<void> _onVerifyOtp(VerifyOtp event, Emitter<AuthState> emit) async {
     emit(const AuthLoading());
     try {
       final user = await _authRepository.verifyOtp(
-          event.verificationId, event.smsCode);
+        event.verificationId,
+        event.smsCode,
+      );
       emit(Authenticated(user));
     } catch (e) {
       emit(AuthError(e.toString()));
@@ -73,7 +78,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onUpdateProfile(
-      UpdateProfile event, Emitter<AuthState> emit) async {
+    UpdateProfile event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthLoading());
     try {
       final user = await _authRepository.updateProfile(
@@ -97,7 +104,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onUpdateFcmToken(
-      UpdateFcmToken event, Emitter<AuthState> emit) async {
+    UpdateFcmToken event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       await _authRepository.updateFcmToken(event.token);
     } catch (_) {}

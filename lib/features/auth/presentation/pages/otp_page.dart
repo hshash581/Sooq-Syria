@@ -2,18 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/config/routes_config.dart';
 import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
 
 class OtpPage extends StatefulWidget {
   final String phone;
+  final String verificationId;
 
-  const OtpPage({super.key, required this.phone});
+  const OtpPage({super.key, required this.phone, required this.verificationId});
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -71,7 +73,7 @@ class _OtpPageState extends State<OtpPage> {
   void _verifyOtp() {
     final code = _otpControllers.map((c) => c.text).join();
     if (code.length == 6) {
-      context.pushReplacement(RoutesConfig.register, extra: widget.phone);
+      context.read<AuthBloc>().add(VerifyOtp(widget.verificationId, code));
     }
   }
 
@@ -149,18 +151,25 @@ class _OtpPageState extends State<OtpPage> {
                           keyboardType: TextInputType.number,
                           maxLength: 1,
                           style: AppTextStyles.headlineMedium,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           decoration: InputDecoration(
                             counterText: '',
                             filled: true,
                             fillColor: AppColors.background,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: AppColors.border),
+                              borderSide: const BorderSide(
+                                color: AppColors.border,
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
+                              borderSide: const BorderSide(
+                                color: AppColors.primary,
+                                width: 2,
+                              ),
                             ),
                           ),
                           onChanged: (value) => _onOtpChange(value, index),
@@ -171,10 +180,7 @@ class _OtpPageState extends State<OtpPage> {
                 ),
               ),
               const SizedBox(height: 32),
-              CustomButton(
-                text: ArabicStrings.confirm,
-                onPressed: _verifyOtp,
-              ),
+              CustomButton(text: ArabicStrings.confirm, onPressed: _verifyOtp),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -182,9 +188,13 @@ class _OtpPageState extends State<OtpPage> {
                   TextButton(
                     onPressed: _canResend ? _resendCode : null,
                     child: Text(
-                      _canResend ? ArabicStrings.resendCode : '$_secondsRemaining',
+                      _canResend
+                          ? ArabicStrings.resendCode
+                          : '$_secondsRemaining',
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: _canResend ? AppColors.primary : AppColors.textHint,
+                        color: _canResend
+                            ? AppColors.primary
+                            : AppColors.textHint,
                       ),
                     ),
                   ),
@@ -192,7 +202,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () => context.pop(),
+                onPressed: () => Navigator.of(context).pop(),
                 child: Text(
                   ArabicStrings.changePhone,
                   style: AppTextStyles.bodyMedium.copyWith(

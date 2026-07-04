@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,18 +10,33 @@ class AuthRemoteDataSource {
   final FirebaseService _firebaseService = FirebaseService();
 
   Future<String> signInWithPhone(String phoneNumber) async {
+    final completer = Completer<String>();
+
     try {
       await _firebaseService.auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {
-          throw e;
+          if (!completer.isCompleted) {
+            completer.completeError(e);
+          }
         },
-        codeSent: (String verificationId, int? resendToken) {},
-        codeAutoRetrievalTimeout: (String verificationId) {},
+        codeSent: (String verificationId, int? resendToken) {
+          if (!completer.isCompleted) {
+            completer.complete(verificationId);
+          }
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          if (!completer.isCompleted) {
+            completer.complete(verificationId);
+          }
+        },
       );
-      return '';
+      return completer.future;
     } on FirebaseAuthException catch (e) {
+      if (!completer.isCompleted) {
+        completer.completeError(e);
+      }
       throw _handleAuthException(e);
     }
   }
@@ -31,7 +47,9 @@ class AuthRemoteDataSource {
         verificationId: verificationId,
         smsCode: smsCode,
       );
-      final userCredential = await _firebaseService.auth.signInWithCredential(credential);
+      final userCredential = await _firebaseService.auth.signInWithCredential(
+        credential,
+      );
       final firebaseUser = userCredential.user;
       if (firebaseUser == null) throw Exception('Failed to sign in');
 
@@ -130,7 +148,10 @@ class AuthRemoteDataSource {
       await _firebaseService.firestore
           .collection(FirebaseConfig.usersCollection)
           .doc(firebaseUser.uid)
-          .update({'fcmToken': token, 'lastSeen': Timestamp.fromDate(DateTime.now())});
+          .update({
+            'fcmToken': token,
+            'lastSeen': Timestamp.fromDate(DateTime.now()),
+          });
     } on FirebaseException catch (e) {
       throw Exception('Failed to update FCM token: ${e.message}');
     }
@@ -138,9 +159,9 @@ class AuthRemoteDataSource {
 
   Future<String> _uploadProfileImage(File image, String userId) async {
     try {
-      final ref = _firebaseService.storage
-          .ref()
-          .child('${FirebaseConfig.usersStorage}/$userId/profile.jpg');
+      final ref = _firebaseService.storage.ref().child(
+        '${FirebaseConfig.usersStorage}/$userId/profile.jpg',
+      );
       await ref.putFile(image);
       return await ref.getDownloadURL();
     } on FirebaseException catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_config.dart';
@@ -9,6 +10,9 @@ import '../../../../core/theme/text_styles.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -98,6 +102,7 @@ class _PhoneForm extends StatefulWidget {
 class _PhoneFormState extends State<_PhoneForm> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
+  String? _phone;
 
   @override
   void dispose() {
@@ -107,43 +112,63 @@ class _PhoneFormState extends State<_PhoneForm> {
 
   void _onLogin() {
     if (_formKey.currentState!.validate()) {
-      final phone = '${AppConfig.defaultCountryCode}${_phoneController.text.replaceAll(RegExp(r'^0'), '')}';
-      context.push(RoutesConfig.otp, extra: phone);
+      _phone =
+          '${AppConfig.defaultCountryCode}${_phoneController.text.replaceAll(RegExp(r'^0'), '')}';
+      context.read<AuthBloc>().add(SignInWithPhone(_phone!));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: CustomTextField(
-              controller: _phoneController,
-              label: ArabicStrings.phoneNumber,
-              hint: ArabicStrings.syrianPhoneHint,
-              keyboardType: TextInputType.phone,
-              validator: AppValidators.validateSyrianPhone,
-              prefixIcon: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                child: Text(
-                  AppConfig.defaultCountryCode,
-                  style: AppTextStyles.bodyLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthCodeSent && _phone != null) {
+          context.push(
+            RoutesConfig.otp,
+            extra: OtpPageArguments(
+              phone: _phone!,
+              verificationId: state.verificationId,
+            ),
+          );
+        }
+
+        if (state is AuthError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: CustomTextField(
+                controller: _phoneController,
+                label: ArabicStrings.phoneNumber,
+                hint: ArabicStrings.syrianPhoneHint,
+                keyboardType: TextInputType.phone,
+                validator: AppValidators.validateSyrianPhone,
+                prefixIcon: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 14,
+                  ),
+                  child: Text(
+                    AppConfig.defaultCountryCode,
+                    style: AppTextStyles.bodyLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 24),
-          CustomButton(
-            text: ArabicStrings.login,
-            onPressed: _onLogin,
-          ),
-        ],
+            const SizedBox(height: 24),
+            CustomButton(text: ArabicStrings.login, onPressed: _onLogin),
+          ],
+        ),
       ),
     );
   }
