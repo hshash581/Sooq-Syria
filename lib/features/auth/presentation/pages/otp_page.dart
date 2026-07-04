@@ -1,8 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../core/constants/arabic_strings.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../../../core/config/routes_config.dart';
+import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -68,7 +71,7 @@ class _OtpPageState extends State<OtpPage> {
   void _verifyOtp() {
     final code = _otpControllers.map((c) => c.text).join();
     if (code.length == 6) {
-      Navigator.pushReplacementNamed(context, RoutesConfig.register, arguments: {'phone': widget.phone});
+      context.pushReplacement(RoutesConfig.register, extra: widget.phone);
     }
   }
 
@@ -189,7 +192,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.pop(),
                 child: Text(
                   ArabicStrings.changePhone,
                   style: AppTextStyles.bodyMedium.copyWith(

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
-import '../../../../core/constants/arabic_strings.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/config/routes_config.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_state.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -39,11 +42,12 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   Future<void> _navigateAfterDelay() async {
     await Future.delayed(const Duration(milliseconds: AppConstants.splashDuration));
     if (!mounted) return;
-    final isLoggedIn = false;
+    final authState = context.read<AuthBloc>().state;
+    final isLoggedIn = authState is Authenticated;
     if (isLoggedIn) {
-      Navigator.pushReplacementNamed(context, RoutesConfig.home);
+      context.go(RoutesConfig.home);
     } else {
-      Navigator.pushReplacementNamed(context, RoutesConfig.login);
+      context.go(RoutesConfig.login);
     }
   }
 
@@ -73,13 +77,13 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: Lottie.asset(
-                    'assets/animations/splash.json',
-                    width: 200,
-                    height: 200,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 180,
+                    height: 180,
+                    fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
                       width: 120,
                       height: 120,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/constants/arabic_strings.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../../../core/config/app_config.dart';
 import '../../../../core/config/routes_config.dart';
+import '../../../../core/constants/arabic_strings.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/utils/validators.dart';
@@ -21,17 +22,26 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 60),
-              Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: const Icon(
-                  Icons.store_rounded,
-                  size: 56,
-                  color: Colors.white,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: const Icon(
+                      Icons.store_rounded,
+                      size: 56,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -61,7 +71,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.pushNamed(context, RoutesConfig.register),
+                    onPressed: () => context.push(RoutesConfig.register),
                     child: Text(
                       ArabicStrings.register,
                       style: AppTextStyles.bodyMedium.copyWith(
@@ -98,7 +108,7 @@ class _PhoneFormState extends State<_PhoneForm> {
   void _onLogin() {
     if (_formKey.currentState!.validate()) {
       final phone = '${AppConfig.defaultCountryCode}${_phoneController.text.replaceAll(RegExp(r'^0'), '')}';
-      Navigator.pushNamed(context, RoutesConfig.otp, arguments: {'phone': phone});
+      context.push(RoutesConfig.otp, extra: phone);
     }
   }
 

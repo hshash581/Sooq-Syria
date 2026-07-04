@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/config/app_config.dart';
 import '../../../../core/config/routes_config.dart';
 import '../../../../core/constants/arabic_strings.dart';
@@ -90,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _onRegister() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, RoutesConfig.home);
+      context.go(RoutesConfig.home);
     }
   }
 
