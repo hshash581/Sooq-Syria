@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'colors.dart';
+
 class AppTextStyles {
   static TextStyle get displayLarge => GoogleFonts.cairo(
     fontSize: 32,
@@ -95,14 +97,14 @@ class AppTextStyles {
   static TextStyle get price => GoogleFonts.cairo(
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: const Color(0xFF1A73E8),
+    color: AppColors.primary,
     height: 1.3,
   );
 
   static TextStyle get priceSmall => GoogleFonts.cairo(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: const Color(0xFF1A73E8),
+    color: AppColors.primary,
     height: 1.3,
   );
 
@@ -115,7 +117,7 @@ class AppTextStyles {
   static TextStyle get caption => GoogleFonts.cairo(
     fontSize: 11,
     fontWeight: FontWeight.normal,
-    color: const Color(0xFF6B7280),
+    color: AppColors.textSecondary,
     height: 1.4,
   );
 
