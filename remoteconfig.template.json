@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "maintenance_mode": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "description": "Enable maintenance mode"
+    },
+    "maintenance_message": {
+      "defaultValue": {
+        "value": "التطبيق قيد الصيانة، يرجى المحاولة لاحقاً"
+      },
+      "description": "Maintenance mode message"
+    },
+    "app_version": {
+      "defaultValue": {
+        "value": "1.0.0"
+      },
+      "description": "Current app version"
+    },
+    "require_phone_verification": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Require phone verification for registration"
+    },
+    "max_ad_images": {
+      "defaultValue": {
+        "value": "10"
+      },
+      "description": "Maximum number of ad images"
+    },
+    "ad_approval_required": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Admin approval required for new ads"
+    },
+    "ad_listing_price": {
+      "defaultValue": {
+        "value": "0"
+      },
+      "description": "Price for listing an ad"
+    },
+    "default_currency": {
+      "defaultValue": {
+        "value": "SYP"
+      },
+      "description": "Default currency"
+    },
+    "supported_currencies": {
+      "defaultValue": {
+        "value": "SYP,USD,EUR,TRY"
+      },
+      "description": "Supported currencies"
+    },
+    "contact_email": {
+      "defaultValue": {
+        "value": "support@sooqsyr.app"
+      },
+      "description": "Contact email"
+    },
+    "privacy_policy_url": {
+      "defaultValue": {
+        "value": "https://sooqsyr.app/privacy"
+      },
+      "description": "Privacy policy URL"
+    },
+    "terms_url": {
+      "defaultValue": {
+        "value": "https://sooqsyr.app/terms"
+      },
+      "description": "Terms of service URL"
+    }
+  },
+  "version": {
+    "versionNumber": "1",
+    "updateTime": "2024-01-01T00:00:00Z"
+  }
+}

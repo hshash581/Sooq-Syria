@@ -1,0 +1,44 @@
+﻿# Sooq Syria - Marketplace App
+
+# Flutter
+*.iml
+.DS_Store
+.android/
+.idea/
+.gradle/
+/kotlin/
+/build/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# Dart
+.dart_tool/
+.packages
+.pub/
+build/
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+*.log
+*.tmp
+
+# Android
+local.properties
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Podfile.lock

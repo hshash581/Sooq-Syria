@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41028256496",
+    "project_id": "sooq-syria-787e6",
+    "storage_bucket": "sooq-syria-787e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41028256496:android:374cf8b3f428b1421eb835",
+        "android_client_info": {
+          "package_name": "com.sooqsyr.sooq_syria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLfwr7HUq_RfuciE-ORpHQ1uTqYbJrBoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
